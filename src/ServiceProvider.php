@@ -2,6 +2,7 @@
 
 namespace Akhaled\LivewireSweetalert;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -15,16 +16,16 @@ class ServiceProvider extends LaravelServiceProvider
     public function register()
     {
         // register our traits
-        $this->app->make('Akhaled\LivewireSweetalert\Traits');
+        // $this->app->make('Akhaled\LivewireSweetalert\Toast');
 
         // load views
-        $this->loadViewsFrom(__DIR__ . '/views', 'livewire:sweetalert');
+        $this->loadViewsFrom(__DIR__ . '/views', 'livewire-sweetalert');
 
         // inject required javascript
-        View::composer('*', 'Akhaled\Http\View\Composers\ProfileComposer');
+        Blade::include('livewire-sweetalert::js', 'livewireSweetalertScripts');
 
         // publish config
-        $this->publishes([__DIR__ . '/config/livewire-sweetalert.php' => config_path('livewire-sweetalert.php')], 'livewire-sweetalert-config');
+        $this->publishes([__DIR__ . '/../config/livewire-sweetalert.php' => config_path('livewire-sweetalert.php')], 'livewire-sweetalert-config');
     }
 
     /**
@@ -35,6 +36,6 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot()
     {
         // merge configurations
-        $this->mergeConfigFrom(__DIR__ . '/config/livewire-sweetalert.php', 'livewire-sweetalert');
+        $this->mergeConfigFrom(__DIR__ . '/../config/livewire-sweetalert.php', 'livewire-sweetalert');
     }
 }

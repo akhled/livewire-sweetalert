@@ -1,5 +1,7 @@
 <?php
 
+namespace Akhaled\LivewireSweetalert;
+
 /**
  * Show toast
  */
