@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Akhaled\\LivewireSweetalert\\LivewireSweetalertServiceProvider"
+                "Akhaled\\LivewireSweetalert\\ServiceProvider"
             ]
         }
     }
