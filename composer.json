@@ -3,8 +3,8 @@
     "description": "Integeration Sweetalert with Livewire",
     "type": "library",
     "require": {
-        "livewire/livewire": "~2.0",
-        "laravel/laravel": "~8.0"
+        "laravel/laravel": "^8.0",
+        "livewire/livewire": "^2.0"
     },
     "license": "MIT",
     "authors": [
