@@ -1,0 +1,30 @@
+{
+    "name": "akhaled/livewire-sweetalert",
+    "description": "Integeration Sweetalert with Livewire",
+    "type": "library",
+    "require": {
+        "livewire/livewire": "~2.0",
+        "laravel/laravel": "~8.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amro Khaled",
+            "email": "i@akhaled.com",
+            "homepage": "http://akhaled.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Akhaled\\LivewireSweetalert\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Akhaled\\LivewireSweetalert\\LivewireSweetalertServiceProvider"
+            ]
+        }
+    }
+}
