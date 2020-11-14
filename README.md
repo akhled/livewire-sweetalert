@@ -4,7 +4,6 @@ Integrate livewire with sweetalert.
 
 - [Installation](#installation)
 - [How to use](#how-to-use)
-  - [2. Include javascript](#2-include-javascript)
 - [Available configuration](#available-configuration)
 
 ## [Installation](https://packagist.org/packages/akhaled/livewire-sweetalert)
@@ -21,7 +20,7 @@ Integrate livewire with sweetalert.
     ...
 ```
 
-### 2. Include javascript
+### 2. Include javascript <!-- omit in toc -->
 
 ```blade
     ...

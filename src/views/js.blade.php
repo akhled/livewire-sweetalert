@@ -31,18 +31,19 @@
     function SwalAlert(icon, title, timeout = 7000) {
         var Toast = Swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: 'bottom-end',
             showConfirmButton: false,
             timer: timeout,
-            onOpen: function() {
-                // Toast.addEventListener('mouseenter', Swal.stopTimer)
-                // Toast.addEventListener('mouseleave', Swal.resumeTimer)
+            timerProgressBar: true,
+            onOpen: function(toast) {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
 
         Toast.fire({
-            icon,
-            title
+            icon: icon,
+            title: title
         })
     }
 

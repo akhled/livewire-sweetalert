@@ -10,17 +10,13 @@ trait Toast
     /**
      * Popup sweet alert toast
      *
-     * @param array $options
+     * @param string $title     toast message
+     * @param string $icon      info|warning|success|error
+     * @param integer $timeout  duration to hide
      * @return void
      */
-    public function toast($options = [])
+    public function toast(string $title, string $icon = 'info', int $timeout = 5000)
     {
-        $options = array_merge([
-            'type'    => 'success',
-            'title'   => 'This is a success alert!!',
-            'timeout' => 10000
-        ], $options);
-
-        $this->emit('swal:toast', $options);
+        $this->emit('swal:toast', compact('title', 'icon', 'timeout'));
     }
 }
