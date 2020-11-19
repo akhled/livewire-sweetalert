@@ -1,12 +1,4 @@
 <script>
-    // const SwalModal = (icon, title, html) => {
-    //     Swal.fire({
-    //         icon,
-    //         title,
-    //         html
-    //     })
-    // }
-
     // const SwalConfirm = (icon, title, html, confirmButtonText, method, params, callback) => {
     //     Swal.fire({
     //         icon,
@@ -28,36 +20,31 @@
     //     })
     // }
 
-    function SwalAlert(icon, title, timeout = 7000) {
-        var Toast = Swal.mixin({
+    function SwalAlert(data) {
+        Swal.fire({
             toast: true,
             position: 'bottom-end',
             showConfirmButton: false,
-            timer: timeout,
+            timer: data.timeout,
+            titleText: data.titleText,
+            icon: data.icon,
             timerProgressBar: true,
-            onOpen: function(toast) {
+            didOpen: function(toast) {
                 toast.addEventListener('mouseenter', Swal.stopTimer)
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-
-        Toast.fire({
-            icon: icon,
-            title: title
-        })
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // this.livewire.on('swal:modal', data => {
-        //     SwalModal(data.icon, data.title, data.text)
-        // })
+        if (Livewire == undefined) return;
+
+        Livewire.on('swal:fire', function(data) { Swal.fire(data) })
 
         // this.livewire.on('swal:confirm', data => {
         //     SwalConfirm(data.icon, data.title, data.text, data.confirmText, data.method, data.params, data.callback)
         // })
 
-        Livewire.on('swal:toast', function(data) {
-            SwalAlert(data.icon, data.title, data.timeout)
-        })
+        Livewire.on('swal:toast', function(data) { SwalAlert(data) })
     })
 </script>
