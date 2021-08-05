@@ -3,7 +3,6 @@
 namespace Akhaled\LivewireSweetalert;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 class ServiceProvider extends LaravelServiceProvider
@@ -15,11 +14,8 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
-        // register our traits
-        // $this->app->make('Akhaled\LivewireSweetalert\Toast');
-
         // load views
-        $this->loadViewsFrom(__DIR__ . '/views', 'livewire-sweetalert');
+        $this->loadViewsFrom(__DIR__ . '/../views', 'livewire-sweetalert');
 
         // inject required javascript
         Blade::include('livewire-sweetalert::js', 'livewireSweetalertScripts');

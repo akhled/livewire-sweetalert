@@ -1,11 +1,13 @@
 # Livewire Sweetalert <!-- omit in toc -->
 
-Integrate livewire with sweetalert.
+Integrate livewire with [Sweetalert](https://sweetalert2.github.io/).
 
 - [Installation](#installation)
 - [How to use](#how-to-use)
 - [Toast](#toast)
 - [Fire](#fire)
+- [Confirm](#confirm)
+  - [Multiple confirmation component](#multiple-confirmation-component)
 - [Available configuration](#available-configuration)
 
 ## [Installation](https://packagist.org/packages/akhaled/livewire-sweetalert)
@@ -14,24 +16,18 @@ Integrate livewire with sweetalert.
 
 ## How to use
 
-### 1. Add `LivewireSweetalertServiceProvider` in `config/app.php` <!-- omit in toc -->
-
-```php
-    ...
-    Akhaled\LivewireSweetalert\LivewireSweetalertServiceProvider::class
-    ...
-```
-
-### 2. Include javascript <!-- omit in toc -->
+### 1. Include javascript<!-- omit in toc -->
 
 ```blade
     ...
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @livewireScripts
-    @livewireSweetalertScripts // or whenever you need
-    ...
+    @livewireSweetalertScripts
+</body>
 ```
 
-### 3. Extra config file <!-- omit in toc -->
+### 2. Extra config file<!-- omit in toc -->
 
 Publish the configs: `php artisan vendor:publish --tag=livewire-sweetalert-config`.
 > See [available configuration](#available-configuration)
@@ -62,7 +58,7 @@ class MyComponent extends Component
 - title
 - [icon](https://sweetalert2.github.io/#icons): success, error, warning, info, question - default is **info**
 - timeout: in milliseconds, default is 5000
--
+
 ---
 
 ## Fire
@@ -91,6 +87,84 @@ class MyComponent extends Component
 - [icon](https://sweetalert2.github.io/#icons): success, error, warning, info, question - default is **info**.
 - html: the html which is displayed under the title.
 - options: [all options](https://sweetalert2.github.io/#configuration) that sweetalert provides.
+
+---
+
+## Confirm
+
+Add `Confirm` trait to your component. Then call `confirm` method whenever you want. On confirmation, `confirmed` event is being emitted. Add it to `$listeners` property in you component. See example:
+
+```php
+use Akhaled\LivewireSweetalert\Confirm;
+use Livewire\Component;
+
+class MyComponent extends Component
+{
+    use Confirm;
+
+    protected $listeners = [
+        'confirmed' => 'onConfirmation'
+    ];
+
+    public function delete()
+    {
+        $options = [];
+        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options)
+    }
+
+    public function onConfirmation()
+    {
+        dd('confirmed!');
+    }
+}
+```
+
+**confirm parameters:**
+
+- title: The title of the popup, as text to avoid HTML injection.
+- html: the html which is displayed under the title.
+- options: [all options](https://sweetalert2.github.io/#configuration) that sweetalert provides. _In addition to event key for using multiple confirmation on same component. see following example_
+
+### Multiple confirmation component
+
+```php
+use Akhaled\LivewireSweetalert\Confirm;
+use Livewire\Component;
+
+class MyComponent extends Component
+{
+    use Confirm;
+
+    protected $listeners = [
+        'confirmed' => 'onConfirmation',
+        'anotherConfirmed' => 'onAnotherConfirmation'
+    ];
+
+    public function delete()
+    {
+        $options = [];
+        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options)
+    }
+
+    public function onConfirmation()
+    {
+        dd('confirmed!');
+    }
+
+    public function anotherAction()
+    {
+        $options = [
+            'event' => 'anotherConfirmed'; // <-- that's the how it works!
+        ];
+        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options)
+    }
+
+    public function onAnotherConfirmation()
+    {
+        dd('confirmed #2!');
+    }
+}
+```
 
 ---
 
