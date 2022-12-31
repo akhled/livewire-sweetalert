@@ -18,7 +18,9 @@ class ServiceProvider extends LaravelServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../views', 'livewire-sweetalert');
 
         // inject required javascript
-        Blade::include('livewire-sweetalert::js', 'livewireSweetalertScripts');
+        $this->app->afterResolving('blade.compiler', function() {
+            Blade::include('livewire-sweetalert::js', 'livewireSweetalertScripts');
+        });
 
         // publish config
         $this->publishes([__DIR__ . '/../config/livewire-sweetalert.php' => config_path('livewire-sweetalert.php')], 'livewire-sweetalert-config');
