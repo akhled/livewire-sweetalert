@@ -1,9 +1,9 @@
 {
   "name": "akhaled/livewire-sweetalert",
-  "description": "Integeration Sweetalert with Livewire",
+  "description": "Integration Sweetalert with Livewire",
   "type": "library",
   "require": {
-    "livewire/livewire": "^2.0"
+    "livewire/livewire": "^3.0"
   },
   "require-dev": {
     "orchestra/testbench": "^6.18"
