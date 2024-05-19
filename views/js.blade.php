@@ -48,15 +48,15 @@
         if (Livewire == undefined) return;
 
         Livewire.on('swal:fire', function(data) {
-            window.swal.fire(data)
+            window.swal.fire(...data)
         })
 
         Livewire.on('swal:confirm', function(data) {
-            SwalConfirm(data)
+            SwalConfirm(...data)
         })
 
         Livewire.on('swal:toast', function(data) {
-            SwalAlert(data)
+            SwalAlert(...data)
         })
     })
 </script>

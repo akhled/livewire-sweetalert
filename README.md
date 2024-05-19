@@ -8,6 +8,7 @@ Integrate livewire with [Sweetalert](https://sweetalert2.github.io/).
 - [Fire](#fire)
 - [Confirm](#confirm)
   - [Multiple confirmation component](#multiple-confirmation-component)
+  - [Using PHP 8 Attribute](#using-php-8-attribute)
 - [Available configuration](#available-configuration)
 
 ## [Installation](https://packagist.org/packages/akhaled/livewire-sweetalert)
@@ -47,7 +48,7 @@ class MyComponent extends Component
     use Toast;
 
     public function save() {
-        $this->toast('Toast message', 'success', 5000)
+        $this->toast('Toast message', 'success', 5000);
     }
     ...
 }
@@ -75,7 +76,7 @@ class MyComponent extends Component
 
     public function save() {
         $options = [];
-        $this->Fire('Error happened', 'error', 'please try again later', $options)
+        $this->Fire('Error happened', 'error', 'please try again later', $options);
     }
     ...
 }
@@ -108,7 +109,7 @@ class MyComponent extends Component
 
     public function delete()
     {
-        $options = [];
+        $options = []; // default ['event' => 'confirmed']
         $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options);
     }
 
@@ -142,8 +143,8 @@ class MyComponent extends Component
 
     public function delete()
     {
-        $options = [];
-        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options)
+        $options = []; // default ['event' => 'confirmed']
+        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options);
     }
 
     public function onConfirmation()
@@ -156,12 +157,39 @@ class MyComponent extends Component
         $options = [
             'event' => 'anotherConfirmed'; // <-- that's how it works!
         ];
-        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options)
+        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options);
     }
 
     public function onAnotherConfirmation()
     {
         dd('confirmed #2!');
+    }
+}
+```
+
+### Using PHP 8 Attribute
+
+```php
+use Akhaled\LivewireSweetalert\Confirm;
+use Livewire\Component;
+use Livewire\Attributes\On;
+
+class MyComponent extends Component
+{
+    use Confirm;
+
+    public function confirmedWithAttribute()
+    {
+        $options = [
+            'event' => 'phpOnAttribute';
+        ];
+        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options)
+    }
+
+    #[On('phpOnAttribute')]
+    public function onConfirmationWithAttribute()
+    {
+        dd('confirmed #3!');
     }
 }
 ```
