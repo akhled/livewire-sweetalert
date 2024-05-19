@@ -109,7 +109,7 @@ class MyComponent extends Component
     public function delete()
     {
         $options = [];
-        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options)
+        $this->confirm('Are you sure you want to delete', 'you can\'t revert that', $options);
     }
 
     public function onConfirmation()

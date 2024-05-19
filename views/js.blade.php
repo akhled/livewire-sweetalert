@@ -23,7 +23,7 @@
 
         window.swal.fire(options).then(function(result) {
             if (result.value && event) {
-                return Livewire.emit(event)
+                return Livewire.dispatch(event)
             }
         })
     }

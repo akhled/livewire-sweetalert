@@ -18,6 +18,6 @@ trait Fire
      */
     public function fire(string $titleText, string $icon = null, $html = null, $options = [])
     {
-        $this->emit('swal:fire', array_merge(compact('titleText', 'icon', 'html'), $options));
+        $this->dispatch('swal:fire', array_merge(compact('titleText', 'icon', 'html'), $options));
     }
 }

@@ -17,6 +17,6 @@ trait Toast
      */
     public function toast(string $titleText, string $icon = 'info', int $timeout = 5000)
     {
-        $this->emit('swal:toast', compact('titleText', 'icon', 'timeout'));
+        $this->dispatch('swal:toast', compact('titleText', 'icon', 'timeout'));
     }
 }

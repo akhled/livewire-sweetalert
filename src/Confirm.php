@@ -30,6 +30,6 @@ trait Confirm
         $options['title'] = $title;
         $options['html'] = $html;
 
-        $this->emit('swal:confirm', compact('options'));
+        $this->dispatch('swal:confirm', compact('options'));
     }
 }
