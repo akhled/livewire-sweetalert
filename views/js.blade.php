@@ -14,16 +14,24 @@
 
     function SwalConfirm(params) {
         var options = params.options,
-            event;
+            event,
+            data;
 
         if (options.event) {
             event = options.event
             delete options.event
         }
 
+        if (options.data) {
+            data = options.data
+            delete options.data
+        }
+
         window.swal.fire(options).then(function(result) {
             if (result.value && event) {
-                return Livewire.dispatch(event)
+                return Livewire.dispatch(event, {
+                    data: data
+                })
             }
         })
     }
