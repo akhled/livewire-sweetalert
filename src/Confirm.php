@@ -10,25 +10,32 @@ trait Confirm
     /**
      * Popup sweet alert confirm
      *
-     * @param string $title     toast message
-     * @param string $html
-     * @param string $options
+     * @param string        $title
+     * @param string        $html
+     * @param array        $options
+     * @param string|null  $event
+     * @param array        $data
      * @return void
      */
-    public function confirm(string $title, string $html = "You can't revert this", array $options = [])
-    {
+    public function confirm(
+        string $title,
+        string $html = "You can't revert this",
+        array $options = [],
+        ?string $event = null,
+        array $data = [],
+    ): void {
         $options = array_merge([
-            'event' => "confirmed",
+            'title' => $title,
+            'html' => $html,
+            'event' => $event ?? "confirmed",
             'icon' => 'warning',
             'showCancelButton' => 'true',
             // 'confirmButtonColor' => '#3085d6',
             'cancelButtonColor' => '#d33',
             'confirmButtonText' => 'Yes',
             'reverseButtons' => 'true',
+            'data' => $data,
         ], $options);
-
-        $options['title'] = $title;
-        $options['html'] = $html;
 
         $this->dispatch('swal:confirm', compact('options'));
     }

@@ -9,6 +9,7 @@ Integrate livewire with [Sweetalert](https://sweetalert2.github.io/).
 - [Confirm](#confirm)
   - [Multiple confirmation component](#multiple-confirmation-component)
   - [Using PHP 8 Attribute](#using-php-8-attribute)
+  - [Passing event data](#passing-event-data)
 - [Available configuration](#available-configuration)
 
 ## [Installation](https://packagist.org/packages/akhaled/livewire-sweetalert)
@@ -190,6 +191,35 @@ class MyComponent extends Component
     public function onConfirmationWithAttribute()
     {
         dd('confirmed #3!');
+    }
+}
+```
+
+### Passing event data
+
+```php
+use Akhaled\LivewireSweetalert\Confirm;
+use Livewire\Component;
+use Livewire\Attributes\On;
+
+class MyComponent extends Component
+{
+    use Confirm;
+
+    public function save()
+    {
+        $this->confirm(
+            event: 'savedConfirmed',
+            data: [
+                'key' => 'value',
+            ]
+        )
+    }
+
+    #[On('savedConfirmed')]
+    public function onSavedConfirmations(array $data)
+    {
+        dd($data['key']); // value
     }
 }
 ```
